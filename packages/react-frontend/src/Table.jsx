@@ -1,4 +1,3 @@
-// src/Table.jsx
 import React from "react";
 
 function TableHeader() {
@@ -7,6 +6,7 @@ function TableHeader() {
       <tr>
         <th>Name</th>
         <th>Job</th>
+        <th>Remove</th>
       </tr>
     </thead>
   );
@@ -15,18 +15,15 @@ function TableHeader() {
 function TableBody(props) {
   const rows = props.characterData.map((row, index) => {
     return (
-        <tr key={index}>
-          <td>{row.name}</td>
-          <td>{row.job}</td>
-          <td>
-            <button onClick={() => props.removeCharacter(index)}>
-              Delete
-            </button>
-          </td>
-        </tr>
+      <tr key={index}>
+        <td>{row.name}</td>
+        <td>{row.job}</td>
+        <td>
+          <button onClick={() => props.removeCharacter(index)}>Delete</button>
+        </td>
+      </tr>
     );
-   }
-  );
+  });
   return <tbody>{rows}</tbody>;
 }
 
@@ -41,4 +38,5 @@ function Table(props) {
     </table>
   );
 }
+
 export default Table;
