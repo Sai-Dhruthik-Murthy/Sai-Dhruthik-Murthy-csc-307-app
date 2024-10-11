@@ -5,7 +5,6 @@ const port = 8000;
 
 app.use(express.json());
 
-// Users data
 const users = {
   users_list: [
     {
@@ -51,21 +50,18 @@ const addUser = (user) => {
   return user;
 };
 
-// New helper function for deleting a user
 const deleteUser = (id) => {
   users["users_list"] = users["users_list"].filter(
     (user) => user["id"] !== id
   );
 };
 
-// New helper function for finding users by name and job
 const findUsersByNameAndJob = (name, job) => {
   return users["users_list"].filter(
     (user) => user["name"] === name && user["job"] === job
   );
 };
 
-// Routes
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
@@ -101,7 +97,6 @@ app.post("/users", (req, res) => {
   res.status(200).send();
 });
 
-// New DELETE route
 app.delete("/users/:id", (req, res) => {
   const id = req.params["id"];
   let user = findUserById(id);
