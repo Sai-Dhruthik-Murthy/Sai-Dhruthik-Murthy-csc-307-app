@@ -1,8 +1,10 @@
 import express from "express";
+import cors from "cors";
 
 const app = express();
 const port = 8000;
 
+app.use(cors());
 app.use(express.json());
 
 const users = {
@@ -10,36 +12,34 @@ const users = {
     {
       id: "xyz789",
       name: "Charlie",
-      job: "Janitor"
+      job: "Janitor",
     },
     {
       id: "abc123",
       name: "Mac",
-      job: "Bouncer"
+      job: "Bouncer",
     },
     {
       id: "ppp222",
       name: "Mac",
-      job: "Professor"
+      job: "Professor",
     },
     {
       id: "yat999",
       name: "Dee",
-      job: "Aspring actress"
+      job: "Aspring actress",
     },
     {
       id: "zap555",
       name: "Dennis",
-      job: "Bartender"
-    }
-  ]
+      job: "Bartender",
+    },
+  ],
 };
 
 // Helper functions
 const findUserByName = (name) => {
-  return users["users_list"].filter(
-    (user) => user["name"] === name
-  );
+  return users["users_list"].filter((user) => user["name"] === name);
 };
 
 const findUserById = (id) =>
@@ -51,9 +51,7 @@ const addUser = (user) => {
 };
 
 const deleteUser = (id) => {
-  users["users_list"] = users["users_list"].filter(
-    (user) => user["id"] !== id
-  );
+  users["users_list"] = users["users_list"].filter((user) => user["id"] !== id);
 };
 
 const findUsersByNameAndJob = (name, job) => {
@@ -69,7 +67,7 @@ app.get("/", (req, res) => {
 app.get("/users", (req, res) => {
   const name = req.query.name;
   const job = req.query.job;
-  
+
   if (name && job) {
     let result = findUsersByNameAndJob(name, job);
     res.send({ users_list: result });
