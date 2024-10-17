@@ -37,7 +37,6 @@ const users = {
   ],
 };
 
-// Helper functions
 function generateId() {
   return Math.random().toString(36).substr(2, 9);
 }
@@ -49,7 +48,6 @@ const findUserByName = (name) => {
 const findUserById = (id) =>
   users["users_list"].find((user) => user["id"] === id);
 
-// Modified addUser function
 const addUser = (user) => {
   const newUser = {
     id: generateId(),
