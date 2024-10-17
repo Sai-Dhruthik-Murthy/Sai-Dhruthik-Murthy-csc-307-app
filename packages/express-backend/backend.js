@@ -38,6 +38,10 @@ const users = {
 };
 
 // Helper functions
+function generateId() {
+  return Math.random().toString(36).substr(2, 9);
+}
+
 const findUserByName = (name) => {
   return users["users_list"].filter((user) => user["name"] === name);
 };
@@ -45,9 +49,14 @@ const findUserByName = (name) => {
 const findUserById = (id) =>
   users["users_list"].find((user) => user["id"] === id);
 
+// Modified addUser function
 const addUser = (user) => {
-  users["users_list"].push(user);
-  return user;
+  const newUser = {
+    id: generateId(),
+    ...user
+  };
+  users["users_list"].push(newUser);
+  return newUser;
 };
 
 const deleteUser = (id) => {
@@ -91,8 +100,8 @@ app.get("/users/:id", (req, res) => {
 
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
-  addUser(userToAdd);
-  res.status(200).send();
+  const addedUser = addUser(userToAdd);
+  res.status(201).send(addedUser);
 });
 
 app.delete("/users/:id", (req, res) => {
